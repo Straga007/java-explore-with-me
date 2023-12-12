@@ -6,8 +6,8 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.dto.ewm.stats.dto.HitDto;
-import ru.practicum.dto.ewm.stats.dto.StatsDto;
+import ru.practicum.ewm.stats.dto.HitDto;
+import ru.practicum.ewm.stats.dto.StatsDto;
 import ru.practicum.ewm.stats.server.service.StatsService;
 
 import javax.validation.Valid;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class Controller {
+public class StatsController {
 
     StatsService statsService;
 

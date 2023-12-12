@@ -10,8 +10,8 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import ru.practicum.ewm.stats.client.client.Client;
-import ru.practicum.dto.ewm.stats.dto.HitDto;
-import ru.practicum.dto.ewm.stats.dto.StatsDto;
+import ru.practicum.ewm.stats.dto.HitDto;
+import ru.practicum.ewm.stats.dto.StatsDto;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;

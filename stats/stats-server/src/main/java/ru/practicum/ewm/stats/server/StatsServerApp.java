@@ -1,11 +1,11 @@
+package ru.practicum.ewm.stats.server;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "ru.practicum")
-public class ServerApp {
+public class StatsServerApp {
     public static void main(String[] args) {
-        SpringApplication.run(ServerApp.class);
+        SpringApplication.run(StatsServerApp.class);
     }
 }

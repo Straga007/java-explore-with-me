@@ -1,9 +1,9 @@
 package ru.practicum.ewm.stats.server.mapper;
 
-import ru.practicum.dto.ewm.stats.dto.HitDto;
+import ru.practicum.ewm.stats.dto.HitDto;
 import ru.practicum.ewm.stats.server.model.Hit;
 
-public class Mapper {
+public class HitMapper {
     public static HitDto toHitDto(Hit hit) {
         return new HitDto(
                 hit.getId(),

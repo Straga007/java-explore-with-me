@@ -12,9 +12,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.practicum.dto.ewm.stats.dto.HitDto;
-import ru.practicum.dto.ewm.stats.dto.StatsDto;
-import ru.practicum.ewm.stats.server.mapper.Mapper;
+import ru.practicum.ewm.stats.dto.HitDto;
+import ru.practicum.ewm.stats.dto.StatsDto;
+import ru.practicum.ewm.stats.server.mapper.HitMapper;
 import ru.practicum.ewm.stats.server.model.Hit;
 import ru.practicum.ewm.stats.server.service.StatsService;
 
@@ -28,10 +28,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(Controller.class)
+@WebMvcTest(StatsController.class)
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class ControllerTest {
+class StatsControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -94,7 +94,7 @@ class ControllerTest {
         LocalDateTime timestamp = LocalDateTime.of(2022, 9, 6, 11, 0, 23);
 
         Hit hit = new Hit(id, app, uri, ip, timestamp);
-        HitDto hitDto = Mapper.toHitDto(hit);
+        HitDto hitDto = HitMapper.toHitDto(hit);
         HitDto newHitDto = new HitDto();
         newHitDto.setId(id);
         newHitDto.setApp(app);

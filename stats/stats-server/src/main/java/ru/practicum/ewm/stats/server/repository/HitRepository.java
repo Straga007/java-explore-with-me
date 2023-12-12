@@ -2,14 +2,13 @@ package ru.practicum.ewm.stats.server.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Component;
-import ru.practicum.dto.ewm.stats.dto.StatsDto;
+import ru.practicum.ewm.stats.dto.StatsDto;
 import ru.practicum.ewm.stats.server.model.Hit;
 
 import java.time.LocalDateTime;
 import java.util.List;
-@Component
-public interface Repository extends JpaRepository<Hit, Long> {
+
+public interface HitRepository extends JpaRepository<Hit, Long> {
 
     String CREATE_NEW_STAT_DTO = "new ru.practicum.ewm.stats.dto.StatsDto";
 

@@ -11,11 +11,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
-import ru.practicum.dto.ewm.stats.dto.HitDto;
-import ru.practicum.dto.ewm.stats.dto.StatsDto;
-import ru.practicum.ewm.stats.server.mapper.Mapper;
+import ru.practicum.ewm.stats.dto.HitDto;
+import ru.practicum.ewm.stats.dto.StatsDto;
+import ru.practicum.ewm.stats.server.mapper.HitMapper;
 import ru.practicum.ewm.stats.server.model.Hit;
-import ru.practicum.ewm.stats.server.repository.Repository;
+import ru.practicum.ewm.stats.server.repository.HitRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import static org.mockito.Mockito.*;
 class StatsServiceImplTest {
 
     @Mock
-    Repository hitRepository;
+    HitRepository hitRepository;
 
     @InjectMocks
     StatsServiceImpl statsService;
@@ -56,7 +56,7 @@ class StatsServiceImplTest {
         hit.setUri(uri);
         hit.setIp(ip);
         hit.setTimestamp(timestamp);
-        HitDto hitDto = Mapper.toHitDto(hit);
+        HitDto hitDto = HitMapper.toHitDto(hit);
 
         when(hitRepository.save(any(Hit.class))).thenReturn(hit);
 
@@ -65,7 +65,7 @@ class StatsServiceImplTest {
 
         //Делаем проверки
         assertNotNull(result);
-        assertEquals(Mapper.toHitDto(hit), result);
+        assertEquals(HitMapper.toHitDto(hit), result);
         verify(hitRepository, times(1)).save(any(Hit.class));
     }
 
