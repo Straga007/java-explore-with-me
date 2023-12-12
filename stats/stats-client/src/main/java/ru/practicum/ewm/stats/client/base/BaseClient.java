@@ -1,4 +1,4 @@
-package ru.practicum.base;
+package ru.practicum.ewm.stats.client.base;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.DefaultUriBuilderFactory;
-import ru.practicum.client.Client;
-import ru.practicum.dto.HitDto;
-import ru.practicum.dto.StatsDto;
+import ru.practicum.ewm.stats.client.client.Client;
+import ru.practicum.dto.ewm.stats.dto.HitDto;
+import ru.practicum.dto.ewm.stats.dto.StatsDto;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package ru.practicum.service;
+package ru.practicum.ewm.stats.server.service;
 
 
 import lombok.AccessLevel;
@@ -8,11 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
-import ru.practicum.dto.HitDto;
-import ru.practicum.dto.StatsDto;
-import ru.practicum.mapper.Mapper;
-import ru.practicum.model.Hit;
-import ru.practicum.repository.Repository;
+import ru.practicum.dto.ewm.stats.dto.HitDto;
+import ru.practicum.dto.ewm.stats.dto.StatsDto;
+import ru.practicum.ewm.stats.server.mapper.Mapper;
+import ru.practicum.ewm.stats.server.model.Hit;
+import ru.practicum.ewm.stats.server.repository.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,12 +23,12 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class StatsServiceImpl implements StatsService {
 
-    Repository hitRepository;
+    Repository Repository;
 
     @Override
     public HitDto addHit(HitDto hitDto) {
         Hit hit = Mapper.toHit(hitDto);
-        return Mapper.toHitDto(hitRepository.save(hit));
+        return Mapper.toHitDto(Repository.save(hit));
     }
 
     @Override
@@ -38,14 +38,14 @@ public class StatsServiceImpl implements StatsService {
         }
         if (unique) {
             if (uris != null) {
-                return hitRepository.findHitsWithUniqueIpWithUris(uris, start, end);
+                return Repository.findHitsWithUniqueIpWithUris(uris, start, end);
             }
-            return hitRepository.findHitsWithUniqueIpWithoutUris(start, end);
+            return Repository.findHitsWithUniqueIpWithoutUris(start, end);
         } else {
             if (uris != null) {
-                return hitRepository.findAllHitsWithUris(uris, start, end);
+                return Repository.findAllHitsWithUris(uris, start, end);
             }
-            return hitRepository.findAllHitsWithoutUris(start, end);
+            return Repository.findAllHitsWithoutUris(start, end);
         }
     }
 }

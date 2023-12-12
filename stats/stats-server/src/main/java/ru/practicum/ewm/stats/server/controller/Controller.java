@@ -1,4 +1,4 @@
-package ru.practicum.controller;
+package ru.practicum.ewm.stats.server.controller;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -6,9 +6,9 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.dto.HitDto;
-import ru.practicum.dto.StatsDto;
-import ru.practicum.service.StatsService;
+import ru.practicum.dto.ewm.stats.dto.HitDto;
+import ru.practicum.dto.ewm.stats.dto.StatsDto;
+import ru.practicum.ewm.stats.server.service.StatsService;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
