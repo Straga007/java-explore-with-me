@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,6 +20,7 @@ public class HitDto {
     Long id;
 
     @NotBlank(message = "App can not be Blank.")
+    @Size(min = 1, max = 255, message = "App length must be between 1 and 255 characters.")
     String app;
 
     @NotBlank(message = "Uri can not be Blank.")
