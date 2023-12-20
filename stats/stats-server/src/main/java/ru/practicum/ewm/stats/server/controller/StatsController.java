@@ -36,7 +36,7 @@ public class StatsController {
     }
 
     @PostMapping("/hit")
-    @ResponseStatus(value = HttpStatus.CREATED)
+    @ResponseStatus(value = HttpStatus.OK)
     public HitDto addHit(@RequestBody @Valid HitDto hitDto) {
         log.info("Получаем запрос hitDto={}", hitDto);
         HitDto newHitDto = statsService.addHit(hitDto);
