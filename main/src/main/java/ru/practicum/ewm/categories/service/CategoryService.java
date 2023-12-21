@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CategoryService {
     Category getCategoryByIdNotDto(Long categoryId);
+
     List<CategoryDto> getCategories(Integer from, Integer size);
 
     CategoryDto getCategoryById(Long categoryId);
