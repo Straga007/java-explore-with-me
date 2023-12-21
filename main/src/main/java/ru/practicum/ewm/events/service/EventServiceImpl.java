@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import ru.practicum.ewm.categories.mapper.CategoryMapper;
 import ru.practicum.ewm.categories.model.Category;
-import ru.practicum.ewm.categories.repository.CategoryRepository;
 import ru.practicum.ewm.categories.service.CategoryService;
 import ru.practicum.ewm.events.dto.*;
 import ru.practicum.ewm.events.enums.StateAdmin;
@@ -45,8 +44,6 @@ public class EventServiceImpl implements EventService {
 
     UserRepository userRepository;
 
-    CategoryRepository categoryRepository;
-
     CategoryService categoryService;
 
     LocationRepository locationRepository;
@@ -57,7 +54,8 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventFullDto addEvent(Long userId, NewEventDto newEventDto) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found."));
-        Category category = categoryRepository.findById(newEventDto.getCategory()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found."));
+        Category category = categoryService.getCategoryByIdNotDto(newEventDto.getCategory());
+
         Location location = LocationMapper.toLocation(newEventDto.getLocation());
         location = locationRepository.existsByLatAndLon(location.getLat(), location.getLon())
                 ? locationRepository.findByLatAndLon(location.getLat(), location.getLon()) : locationRepository.save(location);

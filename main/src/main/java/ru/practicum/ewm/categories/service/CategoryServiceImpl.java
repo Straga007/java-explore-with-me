@@ -25,6 +25,12 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryRepository categoryRepository;
 
     @Override
+    public Category getCategoryByIdNotDto(Long categoryId) {
+        return categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found."));
+    }
+
+    @Override
     public List<CategoryDto> getCategories(Integer from, Integer size) {
         int pageNumber = (int) Math.ceil((double) from / size);
         Pageable pageable = PageRequest.of(pageNumber, size);
