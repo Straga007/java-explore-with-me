@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
@@ -17,7 +17,6 @@ public class UserShortDto {
     @NotNull(message = "UserId can't be null.")
     Long id;
 
-    @NotNull(message = "User name can't be Null")
-    @NotBlank(message = "User name can't be Blank")
+    @Size(min = 1, max = 250)
     String name;
 }

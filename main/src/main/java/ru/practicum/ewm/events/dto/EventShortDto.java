@@ -9,6 +9,7 @@ import ru.practicum.ewm.users.dto.UserShortDto;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventShortDto {
     @NotBlank
+    @Size(max = 2000)
     String annotation;
 
     CategoryDto category;
@@ -38,6 +40,7 @@ public class EventShortDto {
     Boolean paid;
 
     @NotBlank
+    @Size(max = 120)
     String title;
 
     Long views;
