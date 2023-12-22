@@ -5,8 +5,7 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -20,13 +19,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @NotNull(message = "User name can't be Null")
-    @NotBlank(message = "User name can't be Blank")
+    @Size(min = 1, max = 250)
     @Column(nullable = false)
     String name;
 
-    @NotNull(message = "User email can't be Null")
-    @NotBlank(message = "user email can't be Blank")
+    @Size(min = 1, max = 254)
     @Email(message = "Invalid email format")
     @Column(nullable = false, unique = true)
     String email;
