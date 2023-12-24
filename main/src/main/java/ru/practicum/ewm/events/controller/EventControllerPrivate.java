@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/users/{userId}/events")

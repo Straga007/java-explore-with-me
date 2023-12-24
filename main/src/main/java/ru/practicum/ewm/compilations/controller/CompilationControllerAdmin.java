@@ -12,6 +12,7 @@ import ru.practicum.ewm.compilations.model.UpdateCompilationRequest;
 import ru.practicum.ewm.compilations.service.CompilationService;
 
 import javax.validation.Valid;
+
 @Slf4j
 @RestController
 @RequestMapping("/admin/compilations")
