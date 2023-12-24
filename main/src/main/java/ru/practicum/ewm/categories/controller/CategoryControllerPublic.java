@@ -24,17 +24,17 @@ public class CategoryControllerPublic {
     @GetMapping
     public List<CategoryDto> getCategories(@RequestParam(value = "from", defaultValue = "0") @PositiveOrZero Integer from,
                                            @RequestParam(value = "size", defaultValue = "10") @Positive Integer size) {
-        log.info("Получаем запрос на получение Категорий: from={}, size={}", from, size);
+        log.info("Received a request to get Categories: from={}, size={}", from, size);
         List<CategoryDto> categoryDtoList = categoryService.getCategories(from, size);
-        log.info("Возвращаем {} элемет(а/ов) Категорий", categoryDtoList.size());
+        log.info("Returning {} item(s) of Categories", categoryDtoList.size());
         return categoryDtoList;
     }
 
     @GetMapping("/{categoryId}")
     public CategoryDto getCategoryById(@PathVariable Long categoryId) {
-        log.info("Получаем запрос на получение Категории: categoryId={}", categoryId);
+        log.info("Received a request to get a Category: categoryId={}", categoryId);
         CategoryDto categoryDto = categoryService.getCategoryById(categoryId);
-        log.info("Возвращаем CategoryDto={}", categoryDto);
+        log.info("Returning CategoryDto={}", categoryDto);
         return categoryDto;
     }
 }

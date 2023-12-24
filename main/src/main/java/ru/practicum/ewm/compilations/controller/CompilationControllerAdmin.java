@@ -12,7 +12,6 @@ import ru.practicum.ewm.compilations.model.UpdateCompilationRequest;
 import ru.practicum.ewm.compilations.service.CompilationService;
 
 import javax.validation.Valid;
-
 @Slf4j
 @RestController
 @RequestMapping("/admin/compilations")
@@ -24,26 +23,26 @@ public class CompilationControllerAdmin {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public CompilationDto addCompilation(@RequestBody @Valid NewCompilationDto newCompilationDto) {
-        log.info("Получаем запрос на добавление подборки: newCompilationDto={}", newCompilationDto);
+        log.info("Received a request to add a compilation: newCompilationDto={}", newCompilationDto);
         CompilationDto compilationDto = compilationService.addCompilation(newCompilationDto);
-        log.info("Возвращаем compilationDto={}", compilationDto);
+        log.info("Returning compilationDto={}", compilationDto);
         return compilationDto;
     }
 
     @PatchMapping("/{compilationId}")
     public CompilationDto updateCompilation(@PathVariable Long compilationId,
                                             @RequestBody @Valid UpdateCompilationRequest compilationRequest) {
-        log.info("Получаем запрос на обновление подборки: updateCompilationRequest={}", compilationRequest);
+        log.info("Received a request to update a compilation: updateCompilationRequest={}", compilationRequest);
         CompilationDto compilationDto = compilationService.updateCompilation(compilationId, compilationRequest);
-        log.info("Возвращаем обновленную подборку: compilationDto={}", compilationDto);
+        log.info("Returning the updated compilation: compilationDto={}", compilationDto);
         return compilationDto;
     }
 
     @DeleteMapping("/{compilationId}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteCompilation(@PathVariable long compilationId) {
-        log.info("Получаем запрос на удаление подборки: compilationId={}", compilationId);
+        log.info("Received a request to delete a compilation: compilationId={}", compilationId);
         compilationService.deleteCompilation(compilationId);
-        log.info("Подборка compilationId={} удалена.", compilationId);
+        log.info("Compilation compilationId={} deleted.", compilationId);
     }
 }

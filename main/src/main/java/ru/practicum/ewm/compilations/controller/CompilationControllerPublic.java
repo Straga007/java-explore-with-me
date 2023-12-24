@@ -23,20 +23,20 @@ public class CompilationControllerPublic {
     CompilationService compilationService;
 
     @GetMapping
-    public List<CompilationDto> getCompilations(@RequestParam(required = false) Boolean pined,
+    public List<CompilationDto> getCompilations(@RequestParam(required = false) Boolean pinned,
                                                 @RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
                                                 @RequestParam(defaultValue = "10") @Positive Integer size) {
-        log.info("Получаем запрос на список подборки: pined={}, from={}, size={}", pined, from, size);
-        List<CompilationDto> compilationDtoList = compilationService.getCompilations(pined, from, size);
-        log.info("Возвращаем {} элемент(а/ов)", compilationDtoList.size());
+        log.info("Received a request for the list of compilations: pinned={}, from={}, size={}", pinned, from, size);
+        List<CompilationDto> compilationDtoList = compilationService.getCompilations(pinned, from, size);
+        log.info("Returning {} item(s)", compilationDtoList.size());
         return compilationDtoList;
     }
 
     @GetMapping("/{compilationId}")
     public CompilationDto getCompilationById(@PathVariable Long compilationId) {
-        log.info("Получаем запрос на конкретную подборку: compilationId={}", compilationId);
+        log.info("Received a request for a specific compilation: compilationId={}", compilationId);
         CompilationDto compilationDto = compilationService.getCompilationById(compilationId);
-        log.info("Возвращаем compilationDto={}", compilationDto);
+        log.info("Returning compilationDto={}", compilationDto);
         return compilationDto;
     }
 }

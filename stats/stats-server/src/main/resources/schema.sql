@@ -7,5 +7,4 @@ created TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS idx_hits_uri ON hits (uri);
-
 CREATE INDEX IF NOT EXISTS idx_hits_created ON hits (created);

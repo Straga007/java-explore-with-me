@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.events.dto.EventFullDto;
+import ru.practicum.ewm.events.dto.EventRatedDto;
 import ru.practicum.ewm.events.dto.EventShortDto;
 import ru.practicum.ewm.events.service.EventService;
 import ru.practicum.ewm.stats.client.hit.HitClient;
@@ -16,7 +17,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.List;
-
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -36,28 +36,40 @@ public class EventControllerPublic {
                                          @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
                                          @RequestParam(defaultValue = "false") Boolean onlyAvailable,
                                          @RequestParam(defaultValue = "EVENT_DATE") String sort,
+                                         @RequestParam(required = false) String rateSort,
                                          @RequestParam(value = "from", defaultValue = "0") @PositiveOrZero Integer from,
                                          @RequestParam(value = "size", defaultValue = "10") @Positive Integer size,
                                          HttpServletRequest request) {
-        log.info("Получаем запрос на получение списка: text={}, categories={}, paid={}, rangeStart={}, rangeEnd={}, onlyAvailable={}, sort={}, from={}, size={}",
-                text, categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, from, size);
+        log.info("Received a request to get the list: text={}, categories={}, paid={}, rangeStart={}, rangeEnd={}, onlyAvailable={}, sort={}, rateSort={}, from={}, size={}",
+                text, categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, rateSort, from, size);
         request.setAttribute("app_name", "main application");
-        log.info("Создаем {} запрос к {} от {}", request.getMethod(), request.getRequestURI(), request.getRemoteAddr());
+        log.info("Creating {} request to {} from {}", request.getMethod(), request.getRequestURI(), request.getRemoteAddr());
         hitClient.addHit(request);
-        List<EventShortDto> eventShortDtoList = eventService.getEvents(text, categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, from, size, request);
-        log.info("Возвращаем {} элемент(а/ов)", eventShortDtoList.size());
+        List<EventShortDto> eventShortDtoList = eventService.getEvents(text, categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, rateSort, from, size, request);
+        log.info("Returning {} item(s).", eventShortDtoList.size());
         return eventShortDtoList;
     }
 
     @GetMapping("/{eventId}")
     public EventFullDto getEventById(@PathVariable Long eventId,
                                      HttpServletRequest request) {
-        log.info("Получаем запрос на получение эвента: eventId={}", eventId);
+        log.info("Received a request to get an event: eventId={}", eventId);
         request.setAttribute("app_name", "main application");
-        log.info("Создаем {} запрос к {} от {}", request.getMethod(), request.getRequestURI(), request.getRemoteAddr());
+        log.info("Creating {} request to {} from {}", request.getMethod(), request.getRequestURI(), request.getRemoteAddr());
         hitClient.addHit(request);
         EventFullDto eventFullDto = eventService.getEventById(eventId, request);
-        log.info("Возвращаем eventFullDto={}", eventFullDto);
+        log.info("Returning eventFullDto={}", eventFullDto);
         return eventFullDto;
+    }
+
+    @GetMapping("/rating")
+    public List<EventRatedDto> getRatedEvents(@RequestParam(defaultValue = "HIGH") String rateSort,
+                                              @RequestParam(value = "from", defaultValue = "0") @PositiveOrZero Integer from,
+                                              @RequestParam(value = "size", defaultValue = "10") @Positive Integer size) {
+
+        log.info("Received a request to get the rating list of events: rateSort={}, from={}, size={}", rateSort, from, size);
+        List<EventRatedDto> ratedDtoList = eventService.getRatedEvents(rateSort, from, size);
+        log.info("Returning {} item(s).", ratedDtoList.size());
+        return ratedDtoList;
     }
 }
