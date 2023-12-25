@@ -36,9 +36,9 @@ public class EventControllerPrivate {
     @ResponseStatus(value = HttpStatus.CREATED)
     public EventFullDto addEvent(@PathVariable Long userId,
                                  @RequestBody @Valid NewEventDto newEventDto) {
-        log.info("Получаем запрос на добавление события: userId={}, newEventDto={}", userId, newEventDto);
+        log.info("Received a request to add an event: userId={}, newEventDto={}", userId, newEventDto);
         EventFullDto eventFullDto = eventService.addEvent(userId, newEventDto);
-        log.info("Возвращаем созданное событие: eventFullDto={}", eventFullDto);
+        log.info("Returning the created event: eventFullDto={}", eventFullDto);
         return eventFullDto;
     }
 
@@ -46,34 +46,34 @@ public class EventControllerPrivate {
     List<EventShortDto> getEventShortByOwner(@PathVariable Long userId,
                                              @RequestParam(value = "from", defaultValue = "0") @PositiveOrZero Integer from,
                                              @RequestParam(value = "size", defaultValue = "10") @Positive Integer size) {
-        log.info("Получаем запрос на список эвентов от пользователя: userId={}, from={}, size={}", userId, from, size);
+        log.info("Received a request for a list of events from the user: userId={}, from={}, size={}", userId, from, size);
         List<EventShortDto> eventShortDtoList = eventService.getEventsShortByOwner(userId, from, size);
-        log.info("Возвращаем {} элемент(а/ов)", eventShortDtoList.size());
+        log.info("Returning {} item(s).", eventShortDtoList.size());
         return eventShortDtoList;
     }
 
     @GetMapping("/{eventId}")
     public EventFullDto getEventFullByOwner(@PathVariable Long userId, @PathVariable Long eventId) {
-        log.info("Получаем запрос на эвент от пользователя: userId={}, eventId={}", userId, eventId);
+        log.info("Received a request for an event from the user: userId={}, eventId={}", userId, eventId);
         EventFullDto eventFullDto = eventService.getEventFullByOwner(userId, eventId);
-        log.info("Возвращаем eventFullDto={}", eventFullDto);
+        log.info("Returning eventFullDto={}", eventFullDto);
         return eventFullDto;
     }
 
     @PatchMapping("/{eventId}")
     public EventFullDto updateEventByOwner(@PathVariable Long userId, @PathVariable Long eventId, @RequestBody @Valid UpdateEventUserRequest eventUserRequest) {
-        log.info("Получаем запрос на обновление: userId={}, eventId={}, updateEventUserRequest={}", userId, eventId, eventUserRequest);
+        log.info("Received a request to update: userId={}, eventId={}, updateEventUserRequest={}", userId, eventId, eventUserRequest);
         EventFullDto eventFullDto = eventService.updateEventByOwner(userId, eventId, eventUserRequest);
-        log.info("Возвращаем обновленный эвент: eventFullDto={}", eventFullDto);
+        log.info("Returning the updated event: eventFullDto={}", eventFullDto);
         return eventFullDto;
     }
 
     @GetMapping("/{eventId}/requests")
     public List<ParticipationRequestDto> getRequestsByOwnerEvent(@PathVariable Long userId,
                                                                  @PathVariable Long eventId) {
-        log.info("Получаем запрос на список заявок: userId={}, eventId={}", userId, eventId);
+        log.info("Received a request for a list of requests: userId={}, eventId={}", userId, eventId);
         List<ParticipationRequestDto> requestDtoList = requestService.getRequestsByOwnerEvent(userId, eventId);
-        log.info("Возвращаем {} элемент(а/ов)", requestDtoList.size());
+        log.info("Returning {} item(s).", requestDtoList.size());
         return requestDtoList;
     }
 
@@ -81,9 +81,9 @@ public class EventControllerPrivate {
     public EventRequestStatusUpdateResult updateStatusRequests(@PathVariable Long userId,
                                                                @PathVariable Long eventId,
                                                                @RequestBody EventRequestStatusUpdateRequest request) {
-        log.info("Получаем запрос на изменение статуса события: userId={}, eventId={}, request={}", userId, eventId, request);
+        log.info("Received a request to change the status of an event: userId={}, eventId={}, request={}", userId, eventId, request);
         EventRequestStatusUpdateResult updateResult = requestService.updateStatusRequests(userId, eventId, request);
-        log.info("Возвращаем измененную заявку: {}", updateResult);
+        log.info("Returning the updated request: {}", updateResult);
         return updateResult;
     }
 }

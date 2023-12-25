@@ -31,21 +31,22 @@ public class EventControllerAdmin {
                                            @RequestParam(required = false) List<Long> categories,
                                            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
                                            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
+                                           @RequestParam(required = false) String rateSort,
                                            @RequestParam(value = "from", defaultValue = "0") @PositiveOrZero Integer from,
                                            @RequestParam(value = "size", defaultValue = "10") @Positive Integer size) {
-        log.info("Получаем запрос на получение списка эвентов: users={}, states={}, categories={}, rangeStart={}, rangeEnd={}, from={}, size={}",
-                users, states, categories, rangeStart, rangeEnd, from, size);
-        List<EventFullDto> eventFullDtoList = eventService.searchEvents(users, states, categories, rangeStart, rangeEnd, from, size);
-        log.info("Возвращаем {} элемент(а/ов)", eventFullDtoList.size());
+        log.info("Received a request to get the list of events: users={}, states={}, categories={}, rangeStart={}, rangeEnd={}, rateSort={}, from={}, size={}",
+                users, states, categories, rangeStart, rangeEnd, rateSort, from, size);
+        List<EventFullDto> eventFullDtoList = eventService.searchEvents(users, states, categories, rangeStart, rangeEnd, rateSort, from, size);
+        log.info("Returning {} item(s).", eventFullDtoList.size());
         return eventFullDtoList;
     }
 
     @PatchMapping("/{eventId}")
     public EventFullDto updateEventByAdmin(@PathVariable Long eventId,
                                            @RequestBody @Valid UpdateEventAdminRequest eventAdminRequest) {
-        log.info("Получаем запрос на обновление: eventId={}, eventAdminRequest={}", eventId, eventAdminRequest);
+        log.info("Received a request to update: eventId={}, eventAdminRequest={}", eventId, eventAdminRequest);
         EventFullDto eventFullDto = eventService.updateEventByAdmin(eventId, eventAdminRequest);
-        log.info("Возвращаем обновленный eventFullDto={}", eventFullDto);
+        log.info("Returning the updated eventFullDto={}", eventFullDto);
         return eventFullDto;
     }
 }

@@ -22,26 +22,26 @@ public class RequestController {
 
     @GetMapping
     public List<ParticipationRequestDto> getAllRequests(@PathVariable Long userId) {
-        log.info("Получаем запрос на список регистрации от Пользователя: userId={}", userId);
+        log.info("Received a request for the list of registrations from User: userId={}", userId);
         List<ParticipationRequestDto> requestDtoList = requestService.getAllRequests(userId);
-        log.info("Возвращаем {} элемент(а/ов).", requestDtoList.size());
+        log.info("Returning {} item(s).", requestDtoList.size());
         return requestDtoList;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ParticipationRequestDto addRequest(@PathVariable Long userId, @RequestParam Long eventId) {
-        log.info("Получаем запрос на регистрацию от Пользователя: userId={}, eventId={}", userId, eventId);
+        log.info("Received a request for registration from User: userId={}, eventId={}", userId, eventId);
         ParticipationRequestDto requestDto = requestService.addRequest(userId, eventId);
-        log.info("Возвращаем request={}", requestDto);
+        log.info("Returning request={}", requestDto);
         return requestDto;
     }
 
     @PatchMapping("/{requestId}/cancel")
     public ParticipationRequestDto cancelRequest(@PathVariable Long userId, @PathVariable Long requestId) {
-        log.info("Получаем запрос на отмену регистрации от Пользователя: userId={}, requestId={}", userId, requestId);
+        log.info("Received a request to cancel registration from User: userId={}, requestId={}", userId, requestId);
         ParticipationRequestDto requestDto = requestService.cancelRequest(userId, requestId);
-        log.info("Возвращаем requestDto={}", requestDto);
+        log.info("Returning requestDto={}", requestDto);
         return requestDto;
     }
 }
