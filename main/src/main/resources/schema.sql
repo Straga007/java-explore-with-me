@@ -39,7 +39,7 @@ title VARCHAR(120) NOT NULL,
 views BIGINT,
 likes INTEGER,
 dislikes INTEGER,
-rate DOUBLE PRECISION,
+rate NUMERIC,
 FOREIGN KEY (category_id) REFERENCES categories(id),
 FOREIGN KEY (initiator_id) REFERENCES users(id),
 FOREIGN KEY (locations_id) REFERENCES locations(id)
