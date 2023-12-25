@@ -7,8 +7,9 @@ import ru.practicum.ewm.categories.dto.CategoryDto;
 import ru.practicum.ewm.locations.dto.LocationDto;
 import ru.practicum.ewm.users.dto.UserShortDto;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,11 +20,13 @@ import java.time.LocalDateTime;
 public class EventRatedDto {
     Long id;
 
-    @NotBlank
+    @Size(min = 1, max = 2000)
     String annotation;
 
+    @NotNull
     CategoryDto category;
 
+    @Size(min = 1, max = 7000)
     String description;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
@@ -35,14 +38,14 @@ public class EventRatedDto {
     @NotNull
     LocationDto location;
 
-    @NotBlank
+    @Size(min = 1, max = 120)
     String title;
 
     Integer likes;
 
     Integer dislikes;
 
-    Double rate;
+    BigDecimal rate;
 
     Long views;
 }
