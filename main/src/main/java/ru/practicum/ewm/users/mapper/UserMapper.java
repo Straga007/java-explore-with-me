@@ -5,7 +5,6 @@ import ru.practicum.ewm.users.dto.UserRateDto;
 import ru.practicum.ewm.users.dto.UserShortDto;
 import ru.practicum.ewm.users.model.User;
 
-
 public class UserMapper {
     public static User toUser(UserDto userDto) {
         return User.builder()

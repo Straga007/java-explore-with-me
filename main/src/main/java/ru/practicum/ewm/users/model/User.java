@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "users")
@@ -36,5 +37,5 @@ public class User {
     Integer dislikes;
 
     @Column(name = "rate")
-    Double rate;
+    BigDecimal rate;
 }

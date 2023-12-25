@@ -3,6 +3,8 @@ package ru.practicum.ewm.users.dto;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -11,5 +13,5 @@ import lombok.experimental.FieldDefaults;
 public class UserRateDto {
     Long id;
     String name;
-    Double rate;
+    BigDecimal rate;
 }
