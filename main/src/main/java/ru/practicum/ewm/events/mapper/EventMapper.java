@@ -9,6 +9,8 @@ import ru.practicum.ewm.events.model.Event;
 import ru.practicum.ewm.locations.mapper.LocationMapper;
 import ru.practicum.ewm.users.mapper.UserMapper;
 
+import java.math.BigDecimal;
+
 public class EventMapper {
     public static Event toEvent(NewEventDto newEventDto) {
         return Event.builder()
@@ -70,7 +72,7 @@ public class EventMapper {
                 .title(event.getTitle())
                 .likes(event.getLikes())
                 .dislikes(event.getDislikes())
-                .rate(event.getRate())
+                .rate(BigDecimal.valueOf(event.getRate()))
                 .views(event.getViews())
                 .build();
     }
