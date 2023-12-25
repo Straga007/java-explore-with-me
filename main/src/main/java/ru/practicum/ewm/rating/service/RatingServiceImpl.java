@@ -19,6 +19,8 @@ import ru.practicum.ewm.requests.repository.RequestRepository;
 import ru.practicum.ewm.users.model.User;
 import ru.practicum.ewm.users.repository.UserRepository;
 
+import java.math.BigDecimal;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -131,7 +133,7 @@ public class RatingServiceImpl implements RatingService {
         if (rateUser <= 0) {
             initiator.setRate(null);
         } else {
-            initiator.setRate(Math.round(rateUser * 10) / 10.0);
+            initiator.setRate(BigDecimal.valueOf(Math.round(rateUser * 10) / 10.0));
         }
 
         eventRepository.save(event);
